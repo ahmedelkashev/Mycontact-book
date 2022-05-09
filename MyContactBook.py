@@ -6,10 +6,9 @@ list of contacts with details.
 For release version it is planned to make changes on the file and export of the data. 
 '''
 
-from tkinter import *
-from tkinter import ttk, filedialog
+#https://stackoverflow.com/questions/18337882/tkinter-importing-without
+from tkinter import ttk, filedialog, messagebox, Tk, Label, Listbox
 from tkinter.filedialog import askopenfile
-from tkinter import messagebox
 import ast # convert str to dic
  
 # Create window, define the size and the title.
