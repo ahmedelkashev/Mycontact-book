@@ -31,19 +31,18 @@ def open_file():
     else:
         messagebox.showwarning(message="Please select a file.")
 
-def list_contacts(content, window_data):
-    
-    lst = build_list(content)
-   
-    def showSelected(e):
+def showSelected(e):
         line = lb.get(ANCHOR)[0]
         line  = ast.literal_eval(line)
         contact_detail = ""
         for key, value in line.items():
-            value = value.replace("type=", "").replace("type=", "").replace("CELL:", "").replace("HOME:", "")
-            contact_detail += f"{key}: {value}\n"
-        
-        show.config(text=contact_detail)
+            value = value.replace("type=", "").replace("CELL:", "").replace("HOME:", "")
+            contact_detail += f"{key}: {value}\n"   
+        return(contact_detail)     
+
+def list_contacts(content, window_data):
+    
+    lst = build_list(content)
 
     lb = Listbox(window_data)
     lb.index(0)
@@ -51,10 +50,12 @@ def list_contacts(content, window_data):
     
     for i in range(len(lst)): # creates a list of tuples from list object
         lb.insert(i, [lst[i]])
-       
-    lb.bind('<<ListboxSelect>>', showSelected)
 
+    contactDetails = showSelected
+    lb.bind('<<ListboxSelect>>', showSelected)   
+    
     show = Label(window_data)
+    show.config(text=contactDetails)
     show.pack()
 
 def build_list(content):
