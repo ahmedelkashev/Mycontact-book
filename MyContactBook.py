@@ -37,7 +37,7 @@ def open_file():
    # exports the data into a VCF format
     
 
-def listingTodata():
+#def listingTodata():
     # converts the listing data into it's original csv format
 
 def list_contacts(content, window_data):
@@ -54,18 +54,17 @@ def list_contacts(content, window_data):
             contact_detail += f"{key}: {value}\n"
         show.config(text=contact_detail)
 
-    lb = Listbox(window_data)
+    lb = Listbox(window_data, font=("Helvetica", 12), width='25')
     lb.index(0)
-    lb.pack()
+    lb.grid(column=0, row=0, sticky=N, padx=20, pady=20, ipadx=10, ipady=50)
     
     for i in range(len(lst)): # creates a list of tuples from list object
         lb.insert(i, [lst[i]])
        
     lb.bind('<<ListboxSelect>>', showSelected)
-        
-    show = Label(window_data)
-    show.pack()
-    ttk.Button(window_data, text="Export", command=open_file).pack(pady=20)
+
+    show = Label(window_data, font=("Helvetica", 14), width='25', anchor='w')
+    show.grid(column=1, row=0, sticky=N, padx=20, pady=20, ipadx=10, ipady=0)
 
 def build_list(content):
     # parsesing the contant of the file, returns list object of contacts with dictionary - [{'Name': 'John Doe', 'Phone': '+1 202 555 1212'}, {'Name': 'Johnny Depp', 'Phone': '+1 202233 1212'}]
@@ -88,7 +87,6 @@ def build_list(content):
             d.clear
     return lst    
 
-# Labels
 label_file = Label(window, text="Open vcf file:", font=("Arial", 12))
 label_file.place(x=20, y=20)
 label_file.pack(pady=20)
