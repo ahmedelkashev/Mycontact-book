@@ -32,7 +32,16 @@ def open_file():
     else:
         messagebox.showwarning(message="Please select a file.")
 
+
+#def export_data():
+   # exports the data into a VCF format
+    
+
+def listingTodata():
+    # converts the listing data into it's original csv format
+
 def list_contacts(content, window_data):
+#shows the listing of the content
     
     lst = build_list(content)
    
@@ -43,7 +52,6 @@ def list_contacts(content, window_data):
         for key, value in line.items():
             value = value.replace("type=", "").replace("type=", "").replace("CELL:", "").replace("HOME:", "")
             contact_detail += f"{key}: {value}\n"
-        
         show.config(text=contact_detail)
 
     lb = Listbox(window_data)
@@ -54,13 +62,15 @@ def list_contacts(content, window_data):
         lb.insert(i, [lst[i]])
        
     lb.bind('<<ListboxSelect>>', showSelected)
-
+        
     show = Label(window_data)
     show.pack()
+    ttk.Button(window_data, text="Export", command=open_file).pack(pady=20)
 
 def build_list(content):
     # parsesing the contant of the file, returns list object of contacts with dictionary - [{'Name': 'John Doe', 'Phone': '+1 202 555 1212'}, {'Name': 'Johnny Depp', 'Phone': '+1 202233 1212'}]
     lst = []
+    print ("content", content)
     for line in content:
         line = line.strip()
         if line[0:2] == "N:":
@@ -76,7 +86,7 @@ def build_list(content):
         if line == "END:VCARD":
             lst.append(d)
             d.clear
-    return lst
+    return lst    
 
 # Labels
 label_file = Label(window, text="Open vcf file:", font=("Arial", 12))
