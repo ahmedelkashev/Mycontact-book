@@ -41,6 +41,7 @@ def list_contacts(content, window_data):
 #shows the listing of the content
     
     lst = build_list(content)
+    print(lst)
    
     def showSelected(e):
         line = lb.get(ANCHOR)[0]
@@ -50,7 +51,7 @@ def list_contacts(content, window_data):
             value = value.replace("type=", "").replace("type=", "").replace("CELL:", "").replace("HOME:", "")
             contact_detail += f"{key}: {value}\n"
         #option 1: show the text - read only
-        show.config(text=str("Edit:\n") + contact_detail)
+        show.config(text=contact_detail)
         
         #option 2: show the text - editable mode
         # text_box = Text(show,height=12,width=40)
@@ -70,6 +71,7 @@ def list_contacts(content, window_data):
     lb.grid(column=0, row=0, sticky=N, padx=20, pady=20, ipadx=10, ipady=50)
     
     for i in range(len(lst)): # creates a list of tuples from list object
+        print(lst[i])
         lb.insert(i, [lst[i]])
        
     lb.bind('<<ListboxSelect>>', showSelected)
