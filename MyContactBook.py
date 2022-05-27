@@ -33,8 +33,9 @@ def open_file():
         messagebox.showwarning(message="Please select a file.")
 
 
-#def export_data():
+def export_data():
    # exports the data into a VCF format
+   return 0
     
 
 #def listingTodata():
