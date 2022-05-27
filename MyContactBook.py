@@ -25,7 +25,7 @@ def open_file():
         content = file.readlines()
         file.close()
         window_data = Tk()
-        window_data.geometry('600x400')
+        window_data.geometry('670x400')
         window_data.title("Contacts")
         window.destroy()
         list_contacts(content, window_data)
@@ -49,10 +49,17 @@ def list_contacts(content, window_data):
         for key, value in line.items():
             value = value.replace("type=", "").replace("type=", "").replace("CELL:", "").replace("HOME:", "")
             contact_detail += f"{key}: {value}\n"
-        show.config(text=contact_detail)
+        #option 1: show the text - read only
+        show.config(text=str("Edit:\n") + contact_detail)
+        
+        #option 2: show the text - editable mode
+        # text_box = Text(show,height=12,width=40)
+        # text_box.pack()
+        # text_box.insert('end', contact_detail)
+        # text_box.config(state='normal')
 
     def export_data():
-   # exports the data into a VCF format
+    # exports the data into a VCF format
         exportFile = open('content.vcf', 'w')
         exportFile.writelines(content)
         exportFile.close()
@@ -76,7 +83,6 @@ def list_contacts(content, window_data):
 def build_list(content):
     # parsesing the contant of the file, returns list object of contacts with dictionary - [{'Name': 'John Doe', 'Phone': '+1 202 555 1212'}, {'Name': 'Johnny Depp', 'Phone': '+1 202233 1212'}]
     lst = []
-    print ("content", content)
     for line in content:
         line = line.strip()
         if line[0:2] == "N:":
