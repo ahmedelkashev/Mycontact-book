@@ -64,9 +64,10 @@ def list_contacts(content, window_data):
         lb.insert(i, [lst[i]])
        
     lb.bind('<<ListboxSelect>>', showSelected)
-
-    ttk.Button(window_data, text="Export", command=export_data).pack(pady=20)
+    
     show = Label(window_data, font=("Helvetica", 14), width='25', anchor='w')
+    exportButton=ttk.Button(window_data, text="Export", command=export_data)
+    exportButton.grid(row=3,column=1)
     show.grid(column=1, row=0, sticky=N, padx=20, pady=20, ipadx=10, ipady=0)
     
 
