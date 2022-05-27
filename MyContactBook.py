@@ -33,11 +33,6 @@ def open_file():
         messagebox.showwarning(message="Please select a file.")
 
 
-def export_data():
-   # exports the data into a VCF format
-   return 0
-    
-
 def listingTodata():
     # converts the listing data into it's original csv format
     return 0
@@ -56,6 +51,13 @@ def list_contacts(content, window_data):
             contact_detail += f"{key}: {value}\n"
         show.config(text=contact_detail)
 
+    def export_data():
+   # exports the data into a VCF format
+        exportFile = open('content.vcf', 'w')
+        exportFile.writelines(content)
+        exportFile.close()
+        show.config(text="data exported!")
+   
     lb = Listbox(window_data, font=("Helvetica", 12), width='25')
     lb.index(0)
     lb.grid(column=0, row=0, sticky=N, padx=20, pady=20, ipadx=10, ipady=50)
