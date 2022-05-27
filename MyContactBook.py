@@ -38,8 +38,9 @@ def export_data():
    return 0
     
 
-#def listingTodata():
+def listingTodata():
     # converts the listing data into it's original csv format
+    return 0
 
 def list_contacts(content, window_data):
 #shows the listing of the content
@@ -66,6 +67,7 @@ def list_contacts(content, window_data):
 
     show = Label(window_data, font=("Helvetica", 14), width='25', anchor='w')
     show.grid(column=1, row=0, sticky=N, padx=20, pady=20, ipadx=10, ipady=0)
+    ttk.Button(window_data, text="Export", command=export_data).pack(pady=20)
 
 def build_list(content):
     # parsesing the contant of the file, returns list object of contacts with dictionary - [{'Name': 'John Doe', 'Phone': '+1 202 555 1212'}, {'Name': 'Johnny Depp', 'Phone': '+1 202233 1212'}]
