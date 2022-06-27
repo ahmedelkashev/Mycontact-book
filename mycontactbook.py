@@ -48,13 +48,9 @@ def list_contacts(content, window_data):
         for key, value in line.items():
             value = value.replace("type=", "").replace("type=", "").replace("CELL:", "").replace("HOME:", "")
             contact_detail += f"{key}: {value}\n"
-        #option 1: show the text - read only
-        #show.config(text=contact_detail)
-        
-        #option 2: show the text - editable mode
+        #show the text - editable mode
         text_box = Text(show,height=12,width=40)
         text_box.pack_forget()
-        
         text_box.pack()
         text_box.insert('end', contact_detail)
         #text_box.delete('1.0', END)
