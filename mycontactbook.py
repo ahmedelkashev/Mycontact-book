@@ -32,7 +32,6 @@ def open_file():
     else:
         messagebox.showwarning(message="Please select a file.")
 
-
 def listingTodata():
     # converts the listing data into it's original csv format
     return 0
@@ -41,7 +40,6 @@ def list_contacts(content, window_data):
 #shows the listing of the content
     
     lst = build_list(content)
-    print(lst)
    
     def showSelected(e):
         line = lb.get(ANCHOR)[0]
@@ -51,13 +49,16 @@ def list_contacts(content, window_data):
             value = value.replace("type=", "").replace("type=", "").replace("CELL:", "").replace("HOME:", "")
             contact_detail += f"{key}: {value}\n"
         #option 1: show the text - read only
-        show.config(text=contact_detail)
+        #show.config(text=contact_detail)
         
         #option 2: show the text - editable mode
-        # text_box = Text(show,height=12,width=40)
-        # text_box.pack()
-        # text_box.insert('end', contact_detail)
-        # text_box.config(state='normal')
+        text_box = Text(show,height=12,width=40)
+        text_box.pack_forget()
+        
+        text_box.pack()
+        text_box.insert('end', contact_detail)
+        #text_box.delete('1.0', END)
+        text_box.config(state='normal')
 
     def export_data():
     # exports the data into a VCF format
@@ -71,7 +72,6 @@ def list_contacts(content, window_data):
     lb.grid(column=0, row=0, sticky=N, padx=20, pady=20, ipadx=10, ipady=50)
     
     for i in range(len(lst)): # creates a list of tuples from list object
-        print(lst[i])
         lb.insert(i, [lst[i]])
        
     lb.bind('<<ListboxSelect>>', showSelected)
@@ -80,7 +80,6 @@ def list_contacts(content, window_data):
     exportButton=ttk.Button(window_data, text="Export", command=export_data)
     exportButton.grid(row=3,column=1)
     show.grid(column=1, row=0, sticky=N, padx=20, pady=20, ipadx=10, ipady=0)
-    
 
 def build_list(content):
     # parsesing the contant of the file, returns list object of contacts with dictionary - [{'Name': 'John Doe', 'Phone': '+1 202 555 1212'}, {'Name': 'Johnny Depp', 'Phone': '+1 202233 1212'}]
